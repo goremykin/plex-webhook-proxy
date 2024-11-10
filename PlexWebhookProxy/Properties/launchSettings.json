@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "PROXY_RULES": "[{\"UserId\":123,\"Events\":[\"media.scrobble\"],\"Sanitizer\":\"simkl\",\"WebHookUrl\":\"https://api.simkl.com/sync/plex/webhook\"}]"
+      }
+    }
+  }
+}
