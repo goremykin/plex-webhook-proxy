@@ -24,6 +24,11 @@ services:
         ]
     ports:
       - "5050:5050"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 40M
 ```
 
 After setting up the proxy with Docker Compose, you will need to add the webhook to your Plex server and point it to the proxy.
