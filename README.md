@@ -10,20 +10,20 @@ The Plex Webhook Proxy filters events and sends only the required data to Simkl.
 To get started with Plex Webhook Proxy, you can use Docker Compose.
 ```yaml
 services:
-    plex-webhook-proxy:
-        image: ghcr.io/goremykin/plex-webhook-proxy:latest
-        environment:
-        PROXY_RULES: |
-            [
-                {
-                    "UserName": "John",
-                    "Events": ["media.scrobble"], 
-                    "Sanitizer": "simkl",
-                    "WebHookUrl": "destination_address"
-                }
-            ]
-        ports:
-        - "5050:5050"
+  plex-webhook-proxy:
+    image: ghcr.io/goremykin/plex-webhook-proxy:latest
+    environment:
+      PROXY_RULES: |
+        [
+          {
+            "UserName": "John",
+            "Events": ["media.scrobble"], 
+            "Sanitizer": "simkl",
+            "WebHookUrl": "destination_address"
+          }
+        ]
+    ports:
+      - "5050:5050"
 ```
 
 After setting up the proxy with Docker Compose, you will need to add the webhook to your Plex server and point it to the proxy.
