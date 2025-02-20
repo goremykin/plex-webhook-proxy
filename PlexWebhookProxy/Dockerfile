@@ -3,9 +3,6 @@ WORKDIR /source
 
 RUN apk update && apk add --no-cache clang build-base zlib-dev
 
-COPY *.csproj .
-RUN dotnet restore
-
 COPY . .
 RUN dotnet publish -c Release -o /app
 
