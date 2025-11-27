@@ -51,9 +51,11 @@ public class ProxyService
 
     private async Task TryRouteAsync(JsonDocument payload, ProxyRule rule)
     {
+        var payloadToSend = payload;
+
         try
         {
-            ISanitizer? sanitizer = rule.Sanitizer switch
+            var sanitizer = rule.Sanitizer switch
             {
                 "simkl" => serviceProvider.GetRequiredService<SimklSanitizer>(),
                 _ => null
@@ -61,12 +63,12 @@ public class ProxyService
 
             if (sanitizer != null)
             {
-                payload = sanitizer.Sanitize(payload);
+                payloadToSend = sanitizer.Sanitize(payload);
             }
 
-            var payloadJson = payload.RootElement.GetRawText();
-            var payloadHttpContent = new StringContent(payloadJson, Encoding.UTF8, "application/json");
-            var form = new MultipartFormDataContent();
+            var payloadJson = payloadToSend.RootElement.GetRawText();
+            using var payloadHttpContent = new StringContent(payloadJson, Encoding.UTF8, "application/json");
+            using var form = new MultipartFormDataContent();
             form.Add(payloadHttpContent, "payload");
 
             var response = await httpClient.PostAsync(rule.WebHookUrl, form);
@@ -76,6 +78,10 @@ public class ProxyService
         catch (Exception exception)
         {
             logger.LogError(exception, "Failed to route to {Url}", rule.WebHookUrl);
+        }
+        finally
+        {
+            payloadToSend.Dispose();
         }
     }
 }
