@@ -3,6 +3,8 @@
     <File Path=".github/workflows/deploy.yml" />
     <File Path=".gitignore" />
     <File Path="README.md" />
+    <File Path="Dockerfile" />
+    <File Path=".dockerignore" />
   </Folder>
   <Project Path="PlexWebhookProxy/PlexWebhookProxy.csproj" />
 </Solution>
