@@ -1,3 +1,5 @@
+> **This repository has moved to https://codeberg.org/goremykin/plex-webhook-proxy**
+
 ## About
 Plex Webhook Proxy is a proxy service that allows you to filter webhooks from Plex. You can define rules to forward specific events from specific users.
 
